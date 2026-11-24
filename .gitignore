@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+
+# 大数据文件不进仓库，用 python -m src.fetch 下载
+data/gen9champions*.json

@@ -1,0 +1,258 @@
+{
+  "_schema": {
+    "immune_types": "承受这些属性的伤害为 0",
+    "type_mult": "承受这些属性的伤害乘以倍率",
+    "se_mult": "受到效果拔群伤害时乘以倍率",
+    "full_hp_mult": "满血时承受伤害乘以倍率",
+    "stab_mult": "本系加成倍率（默认 1.5）",
+    "aura": "场上所有该属性招式伤害乘以倍率",
+    "convert": "把 from 属性的招式变成 to 属性，power 为威力倍率",
+    "field": "出场时设置的天气/场地",
+    "field_speed": "在该天气/场地下速度翻倍",
+    "note": "机制说明，不参与计算",
+    "negates_weather": "在场时压制所有天气效果（不影响场地）"
+  },
+  "_priority_note": "本文件只收录会改变「属性对位」的特性。纯数值增幅（硬爪/技术高手/无防守等）不改属性关系，另外记在 offense_boost 里备查，不参与对位计算。",
+  "levitate": {
+    "immune_types": [
+      "Ground"
+    ],
+    "note": "不受地面招式影响。但它仍然会触发场地种子类道具（电气种子等），也仍然受地面以外的场地效果影响。"
+  },
+  "flashfire": {
+    "immune_types": [
+      "Fire"
+    ]
+  },
+  "waterabsorb": {
+    "immune_types": [
+      "Water"
+    ]
+  },
+  "voltabsorb": {
+    "immune_types": [
+      "Electric"
+    ]
+  },
+  "sapsipper": {
+    "immune_types": [
+      "Grass"
+    ]
+  },
+  "motordrive": {
+    "immune_types": [
+      "Electric"
+    ]
+  },
+  "stormdrain": {
+    "immune_types": [
+      "Water"
+    ]
+  },
+  "lightningrod": {
+    "immune_types": [
+      "Electric"
+    ]
+  },
+  "eartheater": {
+    "immune_types": [
+      "Ground"
+    ]
+  },
+  "wellbakedbody": {
+    "immune_types": [
+      "Fire"
+    ]
+  },
+  "dryskin": {
+    "immune_types": [
+      "Water"
+    ],
+    "type_mult": {
+      "Fire": 1.25
+    }
+  },
+  "waterbubble": {
+    "type_mult": {
+      "Fire": 0.5
+    },
+    "note": "另使自身水属性招式威力翻倍"
+  },
+  "thickfat": {
+    "type_mult": {
+      "Fire": 0.5,
+      "Ice": 0.5
+    }
+  },
+  "heatproof": {
+    "type_mult": {
+      "Fire": 0.5
+    }
+  },
+  "fluffy": {
+    "type_mult": {
+      "Fire": 2.0
+    },
+    "note": "另使接触类招式伤害减半，接触判定不在本文件范围"
+  },
+  "purifyingsalt": {
+    "type_mult": {
+      "Ghost": 0.5
+    }
+  },
+  "filter": {
+    "se_mult": 0.75
+  },
+  "solidrock": {
+    "se_mult": 0.75
+  },
+  "prismarmor": {
+    "se_mult": 0.75
+  },
+  "multiscale": {
+    "full_hp_mult": 0.5
+  },
+  "shadowshield": {
+    "full_hp_mult": 0.5
+  },
+  "aerilate": {
+    "convert": {
+      "from": "Normal",
+      "to": "Flying",
+      "power": 1.2
+    }
+  },
+  "pixilate": {
+    "convert": {
+      "from": "Normal",
+      "to": "Fairy",
+      "power": 1.2
+    }
+  },
+  "refrigerate": {
+    "convert": {
+      "from": "Normal",
+      "to": "Ice",
+      "power": 1.2
+    }
+  },
+  "galvanize": {
+    "convert": {
+      "from": "Normal",
+      "to": "Electric",
+      "power": 1.2
+    }
+  },
+  "normalize": {
+    "convert": {
+      "from": "*",
+      "to": "Normal",
+      "power": 1.0
+    }
+  },
+  "liquidvoice": {
+    "note": "把音类招式变成水属性。判定依赖招式的 sound 标记，本文件暂无该标记，按不转换处理。"
+  },
+  "adaptability": {
+    "stab_mult": 2.0
+  },
+  "fairyaura": {
+    "aura": {
+      "type": "Fairy",
+      "mult": 1.33
+    }
+  },
+  "darkaura": {
+    "aura": {
+      "type": "Dark",
+      "mult": 1.33
+    }
+  },
+  "aurabreak": {
+    "aura": {
+      "type": "Fairy",
+      "mult": 0.75,
+      "also": "Dark"
+    }
+  },
+  "drizzle": {
+    "field": "Rain"
+  },
+  "drought": {
+    "field": "Sun"
+  },
+  "orichalcumpulse": {
+    "field": "Sun"
+  },
+  "sandstream": {
+    "field": "Sand"
+  },
+  "snowwarning": {
+    "field": "Snow"
+  },
+  "grassysurge": {
+    "field": "Grassy Terrain"
+  },
+  "psychicsurge": {
+    "field": "Psychic Terrain"
+  },
+  "electricsurge": {
+    "field": "Electric Terrain"
+  },
+  "mistysurge": {
+    "field": "Misty Terrain"
+  },
+  "swiftswim": {
+    "field_speed": "Rain"
+  },
+  "chlorophyll": {
+    "field_speed": "Sun"
+  },
+  "sandrush": {
+    "field_speed": "Sand"
+  },
+  "slushrush": {
+    "field_speed": "Snow"
+  },
+  "offense_boost": {
+    "_note": "不改变属性对位，仅记录，供以后做伤害计算时使用",
+    "toughclaws": "接触类招式 ×1.3",
+    "adaptability": "见 stab_mult",
+    "technician": "威力 ≤60 的招式 ×1.5",
+    "sheerforce": "带附加效果的招式 ×1.3",
+    "sharpness": "切割类招式 ×1.5",
+    "megalauncher": "波动类招式 ×1.5",
+    "strongjaw": "啃咬类招式 ×1.5",
+    "punkrock": "音类招式 ×1.3",
+    "hugepower": "攻击 ×2",
+    "purepower": "攻击 ×2",
+    "rockhead": "无反弹伤害",
+    "noguard": "双方命中率 100%",
+    "stamina": "被攻击时防御 +1",
+    "competitive": "能力被降低时特攻 +2",
+    "defiant": "能力被降低时攻击 +2",
+    "mirrorarmor": "反弹能力降低",
+    "roughskin": "接触时反弹 1/8",
+    "flamebody": "接触时 30% 灼伤",
+    "toxicdebris": "物理攻击时撒毒菱",
+    "armortail": "对手不能使用先制招式",
+    "goodasgold": "免疫变化类招式",
+    "soundproof": "免疫音类招式",
+    "prankster": "变化类招式优先度 +1",
+    "unburden": "道具消耗后速度翻倍",
+    "speedboost": "每回合速度 +1",
+    "contrary": "能力变化反向",
+    "regenerator": "换下时回复 1/3",
+    "hospitality": "出场时回复队友 1/4",
+    "shadowtag": "对手无法替换",
+    "poisontouch": "接触时 30% 中毒"
+  },
+  "cloudnine": {
+    "negates_weather": true,
+    "note": "在场时所有天气效果无效：天气伤害加成消失、天气加速类特性失效、气象球变回普通系。天气本身仍然算『存在』，只是效果被压制，所以不会被它『消除』。"
+  },
+  "airlock": {
+    "negates_weather": true,
+    "note": "同 cloudnine（气闸）。当前 Champions 环境里无携带者。"
+  }
+}
