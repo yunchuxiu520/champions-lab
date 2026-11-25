@@ -52,10 +52,22 @@ def _norm_ability(ability: str) -> str:
 
 @lru_cache(maxsize=1)
 def load_moves() -> dict[str, dict]:
-    """招式 ID → 招式信息（属性、威力、分类）。"""
+    """招式 ID → 招式信息（属性、威力、分类）。
+
+    会应用 Champions 对威力的修改（data/rules/moves_override.json），
+    因为 Showdown 原版数值不等于 Champions 的数值。
+    """
     path = dex.DATA_DIR / "moves.json"
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        moves = json.load(f)
+    ov = dex.DATA_DIR / "rules" / "moves_override.json"
+    if ov.exists():
+        with open(ov, encoding="utf-8") as f:
+            overrides = json.load(f).get("basePower", {})
+        for mid, bp in overrides.items():
+            if mid in moves:
+                moves[mid] = {**moves[mid], "basePower": bp}
+    return moves
 
 
 def move_weight(move_id: str) -> float:
@@ -118,13 +130,19 @@ def _kit_with_ability(mon: dict, name: str, mtype: str, ability: str,
     moves = mon.get("Moves") or {}
     total = sum(moves.values()) or 1
     is_stab = mtype in dex.types_of(name)
+    # 伪天气（超级日光等）：自己的招式按该天气算，不参与抢天气
+    pseudo = abilities.rule_of(ability).get("pseudo_weather")
     score = 0.0
     for mid, cnt in moves.items():
         share = cnt / total
         if mid in CONDITIONAL_TYPE_MOVES:
-            if not split:
+            if pseudo:
+                from .fields import WEATHER_BALL_TYPE
+                p_type = 1.0 if WEATHER_BALL_TYPE.get(pseudo) == mtype else 0.0
+            elif not split:
                 continue
-            p_type = split.get(mid, {}).get(mtype, 0.0)
+            else:
+                p_type = split.get(mid, {}).get(mtype, 0.0)
             if p_type <= 0:
                 continue
             w = move_weight(mid)

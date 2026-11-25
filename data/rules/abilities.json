@@ -10,7 +10,9 @@
     "field": "出场时设置的天气/场地",
     "field_speed": "在该天气/场地下速度翻倍",
     "note": "机制说明，不参与计算",
-    "negates_weather": "在场时压制所有天气效果（不影响场地）"
+    "negates_weather": "在场时压制所有天气效果（不影响场地）",
+    "pseudo_weather": "只对自己生效的伪天气，不参与抢天气",
+    "terrain_type": "随场地改变自身属性"
   },
   "_priority_note": "本文件只收录会改变「属性对位」的特性。纯数值增幅（硬爪/技术高手/无防守等）不改属性关系，另外记在 offense_boost 里备查，不参与对位计算。",
   "levitate": {
@@ -254,5 +256,48 @@
   "airlock": {
     "negates_weather": true,
     "note": "同 cloudnine（气闸）。当前 Champions 环境里无携带者。"
+  },
+  "dragonize": {
+    "convert": {
+      "from": "Normal",
+      "to": "Dragon",
+      "power": 1.2
+    },
+    "note": "龙皮肤。可变属性的一般招式改为龙属性并 ×1.2。持有者：超级大力鳄（环境 0.26%）。"
+  },
+  "eelevate": {
+    "immune_types": [
+      "Ground"
+    ],
+    "note": "鳗鳗高升。免疫地面招式，同时免疫撒菱/毒菱/黏黏网/Arena Trap；重力、扎根、击落、千箭齐发可破。持有者：超级麻麻鳗鱼王（0.28%）。"
+  },
+  "megasol": {
+    "pseudo_weather": "Sun",
+    "note": "超级日光。**只对自己的招式有效**：自己的招式按晴天计算（气象球变火、日光束免蓄力），但不给全场设晴天，也不参与抢天气。持有者：超级大竺葵（1.24%）。"
+  },
+  "firemane": {
+    "offense_boost_note": "火属性攻击时进攻能力 ×1.5",
+    "note": "火焰鬃毛。持有者：超级火炎狮（1.13%）。"
+  },
+  "piercingdrill": {
+    "offense_boost_note": "接触招式可穿透保护，但伤害为 1/4",
+    "note": "贯穿钻。持有者：超级龙头地鼠（0.20%）。"
+  },
+  "spicyspray": {
+    "offense_boost_note": "受到攻击伤害时使攻击者灼伤（不要求接触）",
+    "note": "辣椒喷发。**这是状态效果不是伤害**：灼伤会让对方物理攻击减半，所以算伤害时要连带调整对方输出。持有者：超级狠辣椒（1.04%）。"
+  },
+  "mimicry": {
+    "terrain_type": {
+      "Electric Terrain": "Electric",
+      "Grassy Terrain": "Grass",
+      "Misty Terrain": "Fairy",
+      "Psychic Terrain": "Psychic"
+    },
+    "note": "拟态。随当前场地改变自身属性，场地消失恢复原属性。持有者：伽勒尔泥巴鱼（0.03%）。"
+  },
+  "unseenfist": {
+    "offense_boost_note": "接触招式可穿透保护",
+    "note": "无形拳。持有者：超级泥偶巨人（0.37%）。"
   }
 }
