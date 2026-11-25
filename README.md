@@ -302,6 +302,61 @@ terrainpulse  Normal 58%, Grass 22%, Psychic 16%, Electric 4%
 
 ---
 
+## 补强建议（`src/suggest.py`）
+
+回答一个具体问题：**我的队伍弱火，环境里前 40 名中谁既能抗火、使用率又不低？**
+
+```bash
+# 谁能抗冰（只看属性）
+python -m src.suggest --resist Ice
+
+# 含特性（Levitate 会算成免疫）
+python -m src.suggest --resist Ice --ability
+
+# 给队伍做补强建议
+python -m src.suggest --team "Salamence-Mega" "Charizard-Mega-Y" Garchomp Rillaboom Sneasler Kingambit
+
+# 看两只的对位
+python -m src.suggest --check "Eelektross-Mega" Ground
+```
+
+### 净收益怎么算
+
+```
+净收益 = 填补的「主要风险」数 − 自己新增的弱点数
+```
+
+「主要风险」= 队伍弱点只数 × 环境火力 排名前 5 的属性（不是所有弱点属性，
+否则数字会虚高成"补 9 个洞"）。
+
+**示例输出（你的队伍）**
+
+```
+【最该补：Fire】队伍 2 只弱它，环境火力 100%
+  ★ Arcanine-Hisui   使用率 6.28%  抗 Fire 到 0.25
+      填补：Flying/Fairy/Fire（3 项）  新增弱点：无（0 项）  净 +3
+  ★ Dragonite-Mega   使用率 3.97%  抗 Fire 到 0.25
+      填补：Ground/Flying/Fire（3 项）  新增弱点：无（0 项）  净 +3
+```
+
+### 三个函数
+
+| 函数 | 说明 |
+|---|---|
+| `resists(name, attack_type)` | 只看属性的倍率，查不到名字抛 `ValueError` |
+| `resists_with_ability(name, attack_type, mon)` | 连带特性，`Eelektross-Mega` 对地面 2.00 → **0.00** |
+| `advise_team(chaos, team)` | 完整补强建议 |
+
+### 验收器
+
+`src/check_suggest.py` 是给练习用的验收脚本，24 项检查：
+
+```bash
+python -m src.check_suggest
+```
+
+---
+
 ## 官方资料包校验（2026-10-21 版）
 
 拿到一份第三方整理的 **Pokémon Champions M-C 双打资料包**（适用期 2026-09-09 ~ 2026-12-02），
